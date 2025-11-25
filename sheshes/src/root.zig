@@ -68,11 +68,13 @@ pub const ChessBoard = struct {
     //
     // NOTE(AABIB):
     //  1) why did i even put these here? alive/dead pieces and their type
+    //  2) 16 first bits are normal pieces - 16 latter pieces are for promoted pawns
+    //      4 piece kind = 2 bits
     //
     live_white_bits: u32 = 0x00_00_00_00,
     live_black_bits: u32 = 0x00_00_00_00,
-    dead_white_bits: u16 = 0x00_00_00_00,
-    dead_black_bits: u16 = 0x00_00_00_00,
+    dead_white_bits: u32 = 0x00_00_00_00,
+    dead_black_bits: u32 = 0x00_00_00_00,
 
     //
     // NOTE(AABIB):
