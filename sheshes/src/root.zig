@@ -36,6 +36,7 @@ pub const ChessGame = struct {
 };
 
 pub const BoardOptions = struct {};
+
 // TODO: make this a type
 // TODO: make a board without move checks
 // TODO: find the best way to calculate if king is attacked or not
@@ -81,11 +82,29 @@ pub const ChessBoard = struct {
     // max number of pieces attacking a single square is 15
     // 1 king - 2 soldier - 1 bishop - 8 knights - 2 rooks - 1 queen
     //
-    white_capture_squares: [64]u4 = undefined,
-    black_capture_squares: [64]u4 = undefined,
+    //  white_capture_squares: [64]u4 = undefined,
+    //  black_capture_squares: [64]u4 = undefined,
+    //
+    pub var boardbits: u32 = 0x00;
 
-    fn start_state() !void {
+    fn start_state() !ChessBoard {
         //
+        const board = ChessBoard{};
+
+        board.pawn_bits = 0x00_FF_00_00_00_00_FF_00;
+        board.rook_bits = 0x81_00_00_00_00_00_00_81;
+        board.horse_bits = 0x42_00_00_00_00_00_00_42;
+        board.elephant_bits = 0x24_00_00_00_00_00_00_24;
+        board.queen_bits = 0x10_00_00_00_00_00_00_10;
+        board.king_bits = 0x01_00_00_00_00_00_00_01;
+        board.white_bits = 0xFF_FF_00_00_00_00_00_00;
+        board.black_bits = 0x00_00_00_00_00_00_FF_FF;
+        board.live_white_bits = 0x00_00_00_00;
+        board.live_black_bits = 0x00_00_00_00;
+        board.dead_white_bits = 0x00_00_00_00;
+        board.dead_black_bits = 0x00_00_00_00;
+
+        return board;
     }
 
     fn move() !u8 {
