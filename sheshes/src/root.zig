@@ -41,6 +41,11 @@ pub const BoardOptions = struct {};
 // TODO: make a board without move checks
 // TODO: find the best way to calculate if king is attacked or not
 // -  save-cache it for use for next move maybe
+//
+//
+// NOTE(ABBIB):
+// Cordinate System:
+//
 pub const ChessBoard = struct {
 
     // 1111 1111
@@ -85,7 +90,6 @@ pub const ChessBoard = struct {
     //  white_capture_squares: [64]u4 = undefined,
     //  black_capture_squares: [64]u4 = undefined,
     //
-    pub var boardbits: u32 = 0x00;
 
     fn start_state() !ChessBoard {
         //
@@ -107,7 +111,7 @@ pub const ChessBoard = struct {
         return board;
     }
 
-    fn move() !u8 {
+    fn move(kind: u8) !u8 {
         // const piece_color = try get_piece_color(); // white/black as value - voide as error
         // const piece_side_color = try check_piece_side_same_color(); // TOOD: better naming
         //
@@ -115,5 +119,24 @@ pub const ChessBoard = struct {
         // const legal_move_kind_check = try check_kind_legal_move(); // TODO: better naming
         // const legal_move_king_check = try check_king_legal_move(); // legal move is not legal - its a pinned piece
         //
+        // 1 pawn movement:
+        // 2 rook movement:
+        // 4 bishop movement:
+        // 8 knight movement:
+        // 16 queen movement:
+        // 32 king movement:
+        //
+        //
+        switch (kind) {
+            0b0000_0001 => {},
+            0b0000_0010 => {},
+            0b0000_0100 => {},
+            0b0000_1000 => {},
+            0b0001_0000 => {},
+            0b0010_0000 => {},
+            else => {
+                @panic("there is only 6 kind of pieces, how did we ended up here then?");
+            },
+        }
     }
 };
